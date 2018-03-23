@@ -5,15 +5,15 @@ import Navigation from './components/Navigation/'
 import MenuBar from './components/ListItemClick/another'
 import MyList from './components/TheToggleList/'
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <Navigation />
-//       </div>
-//     );
-//   }
-// }
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Navigation />
+      </div>
+    );
+  }
+}
 
 // class App extends Component {
 //   render() {
@@ -25,14 +25,14 @@ import MyList from './components/TheToggleList/'
 //   }
 // }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <MenuBar/>
-      </div>
-    );
-  }
-}
+// class App extends Component {
+//   render() {
+//     return (
+//       <div className="App">
+//         <MenuBar/>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
