@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Navigation from './components/Navigation/'
+import Home from './components/Home'
+import Navigation from './components/Navigation'
 import MenuBar from './components/ListItemClick/another'
 import MyList from './components/TheToggleList/'
+
 
 class App extends Component {
   render() {

@@ -1,27 +1,20 @@
-import React,{Component} from 'react'
-import { BrowserRouter as Router, Switch, Route, HashRouter } from "react-router-dom";
-import Home from '../Home/';
-import Sidebar from '../Sidebar'
+import React from 'react'
+import {Route} from "react-router-dom";
 
-class ModalSwitch extends Component {
-	previousLocation = this.props.location;
-
-	render(){
-		return(
-			<div>
-				<Switch>
-					<Route path="/main" component={Sidebar} />
-					<Route exact path="/" component={Home} />
-				</Switch>
-			</div>
-		)
-	}
-}
+import Home from '../Home';
+import Sidebar from '../Sidebar';
+import Sandwiches from '../Page/sandwiches'
+import Bus from '../Page/bus'
+import Car from '../Page/car'
+import Tacos from '../Page/tacos'
 
 const Navigation = () => (
-	<Router>
-		<Route component={ModalSwitch} />
-	</Router>
-);
+	<div>
+		<Route exact path="/" component={Home}/>
+		<Route path="/sidebar" component={Sidebar}/>
+		<Route path="/sandwiches" component={Sandwiches}/>
+		<Route path="/tacos" component={Tacos}/>
+	</div>
+)
 
 export default Navigation

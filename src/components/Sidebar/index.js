@@ -1,148 +1,63 @@
-import React from 'react'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import React from 'react';
+import {Route, Switch} from 'react-router-dom';
 
-// Mỗi logical có 2 components, một
-// cho sidebar và một cho trang chính.
-// Chúng ta muốn  muốn xuất cả hai trong
-// địa điểm khác nhau khi đường dẫn phù hợp
-// URL hiện tại.
+import ContentPage1 from './Content/content_page1';
+import ContentPage2 from './Content/content_page2';
+import ContentPage3 from './Content/content_page3';
 
-const routes = [
-	{
-		id: 0,
-		path: "",
-		exact: true,
-		name: 'home',
-		sidebar: () => <div>home!</div>,
-		main: () => <h2>Home</h2>,
-		children: [
-			{
-				idSub: 0,
-				path: "/home1",
-				name: 'home1',
-				sidebar: () => <div>Home 1</div>,
-				main: () => <div>Home 1</div>
-			},
-			{
-				idSub: 1,
-				path: "/home2",
-				name: 'home2',
-				sidebar: () => <div>Home 2</div>,
-				main: () => <div>Home 2</div>
-			}
-		]
-	},
-	{
-		id: 1,
-		path: "/bubblegum",
-		name: 'bubblegum',
-		sidebar: () => <div>bubblegum</div>,
-		main: () => <h2>Bubblegum</h2>
-	},
-	{
-		id: 2,	
-		path: "/shoelaces",
-		name: 'shoelaces',
-		sidebar: () => <div>shoelaces!</div>,
-		main: () => <h2>Shoelaces</h2>,
-		children: [
-			{
-				idSub: 0,
-				path: "/shoelaces1",
-				name: 'shoelaces1',
-				sidebar: () => <div>shoelaces 1</div>,
-				main: () => <div>shoelaces 1</div>
-			},
-			{
-				idSub: 1,
-				path: "/shoelaces2",
-				name: 'shoelaces2',
-				sidebar: () => <div>shoelaces 2</div>,
-				main: () => <div>shoelaces 2</div>
-			}
-		]
+const SideBar = ({match}) => {
+	let style = {
+		listStyleType: 'none',
+		paddingLeft: '0em'
 	}
-];
-
-const SubMenu = ({subroute,match}) => {
-	const renderSubItem = subroute
-		? 
-		subroute.map((sub)=>
-			<li key={sub.idSub}>
-				<Link to={match.url + sub.path}>{sub.name}</Link>
-			</li>
-		)
-		:
-		null
-	return renderSubItem
-}
-
-const Menu = ({route,match}) => {
-	const renderItem = (
-		<li key={route.id}>
-			<Link to={match.url + route.path}>{route.name}</Link>
-			<ul>
-				<SubMenu match={match} subroute={route.children?route.children:null} />
-			</ul>
-		</li>
-	)
-	return renderItem
-}
-
-const SidebarExample = ({match}) => {
-	function renderItem(route){
-		return(
-			<Menu 
-				route={route}
-				match={match}
-			/>
-		)
+	let styleLeft={
+		float: 'left',
+		width: '20%',
+		border: '1px solid #000',
+		borderBox: 'box-sizing'
 	}
-	return (
+	let styleRight={
+		float: 'left',
+		width: '79%',
+		borderBox: 'box-sizing'
+	}
+
+	return(
 		<div>
-			<Link to="/">Welcome</Link>
-			<Router>
-				<div style={{ display: "flex" }}>
-					<div className="menu-item"
-						style={{
-				        padding: "10px",
-				        width: "40%",
-				        background: "#f0f0f0"}}
-					>
-						<ul
-							style={{ listStyleType: "none", padding: 0 }}
-						>
-							{routes.map(renderItem)}
+			<div className="menu-left" style={styleLeft}>
+				<ul style={{listStyleType: 'none'}}>
+					<li>
+						<a href={`${match.url}/cp1`}>ContentPage1</a>
+					</li>
+					<li>
+						<a href={`${match.url}/cp2`}>ContentPage2</a>
+					</li>
+					<li>
+						<a href={`${match.url}/cp3`}>ContentPage3</a>
+						<ul style={style}>
+							<li>
+								<a href={`${match.url}/cp3/1`}>Sub Content 1</a>
+							</li>
+							<li>
+								<a href={`${match.url}/cp3/2`}>Sub Content 2</a>
+							</li>
+							<li>
+								<a href={`${match.url}/cp3/3`}>Sub Content 3</a>
+							</li>
 						</ul>
-						
-					</div>	
-					<div className="page-item" style={{flex: 1,padding: "10px"}}>
-						{routes.map((route,index)=>(
-							route.children
-							?
-							(
-							route.children.map((route,index)=>(
-								<Route 
-									key={route.idSub}
-									path={match.url + route.path}
-									component={route.main}
-								/>
-							))
-							)
-							:
-							<Route
-								key={route.id}
-								path={match.url + route.path}
-								exact={route.exact}
-								component={route.main}
-							/>	
-						))}
-					</div>
-				</div>
-			</Router>
+					</li>
+				</ul>
+			</div>
+			<div className="content-sidebar" style={styleRight}>
+				<Switch>
+					<Route exact path={`${match.url}/cp1`} component={ContentPage1}/>
+					<Route path={`${match.url}/cp2`} component={ContentPage2}/>
+					<Route path={`${match.url}/cp3`} component={(props) => <ContentPage3 {...props} previousMatch={match}/>}/>	
+				</Switch>
+			</div>
+			<div className="clear" style={{clear: 'both'}}></div>
 		</div>
-		
 	)
 }
 
-export default SidebarExample
+export default SideBar;
