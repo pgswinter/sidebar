@@ -183,16 +183,9 @@ class SideBar extends Component{
 				</div>
 				<div className="content-sidebar" style={styleRight}>
 					<Switch>
-						{this.state.routes.map((item,index)=>
-							item.exact
-							?
-							<Route exact path={`${match.url}/${item.path}`} component={item.component}/>
-							:
-							<Route path={`${match.url}/${item.path}`} component={item.component}/>
-						)}
-						{/*<Route exact path={`${match.url}/cp1`} component={ContentPage1}/>
+						<Route exact path={`${match.url}/cp1`} component={ContentPage1}/>
 						<Route path={`${match.url}/cp2`} component={ContentPage2}/>
-						<Route path={`${match.url}/cp3`} component={(props) => <ContentPage3 {...props} previousMatch={match}/>}/> */}
+						<Route path={`${match.url}/cp3`} component={(props) => <ContentPage3 {...props} previousMatch={match}/>}/>	
 					</Switch>
 				</div>
 				<div className="clear" style={{clear: 'both'}}></div>

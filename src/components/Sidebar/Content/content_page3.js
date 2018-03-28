@@ -4,9 +4,7 @@ import SubContent1 from './Sub/sub_content1';
 import SubContent2 from './Sub/sub_content2';
 import SubContent3 from './Sub/sub_content3';
 
-const ContentPage3 = ({previousMatch,match}) => {
-	console.log('previousMatch',previousMatch)
-	console.log('match',match)
+const ContentPage3 = ({match}) => {
 	return (
 		<div>
 			<h2>Content Page 3</h2>
